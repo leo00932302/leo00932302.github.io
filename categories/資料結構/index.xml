@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>資料結構 on rui&#39;s blog</title>
+        <link>https://leo00932302.github.io/categories/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B/</link>
+        <description>Recent content in 資料結構 on rui&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Tue, 23 Jan 2024 23:23:04 +0800</lastBuildDate><atom:link href="https://leo00932302.github.io/categories/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>資料結構簡介</title>
+        <link>https://leo00932302.github.io/post/data-structure/</link>
+        <pubDate>Tue, 23 Jan 2024 23:23:04 +0800</pubDate>
+        
+        <guid>https://leo00932302.github.io/post/data-structure/</guid>
+        <description>&lt;h1 id=&#34;資料結構&#34;&gt;資料結構&lt;/h1&gt;
+&lt;p&gt;想學好資料結構的第一步就要先知道，資料結構本身和演算法的關係密不可分，所以兩本課本內容相似的地方非常多，若要說差在哪裡，
+資料結構重視資料的儲存方式，演算法在乎取用這些資料的方式。一個好的資料結構並不一定代表儲存空間越小，因為使用越小的儲存
+空間可能會帶來取用的不便利，也就是說會加重演算法的負擔。而根據目的的不同選擇不同的演算法及資料結構，使其可應對大多數狀況
+則是工程師的工作。&lt;/p&gt;
+&lt;h2 id=&#34;簡單的排序問題&#34;&gt;簡單的排序問題:&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//the programe using c++ and vector
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#incude&amp;lt;iostream&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;bubble_sort&lt;/span&gt;(vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;vec){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; ix&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;ix&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;vec.size();ix&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; jx&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ix;jx&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;vec.size();jx&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vec[jx]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;vec[jx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                swap(vec[jx],vec[jx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

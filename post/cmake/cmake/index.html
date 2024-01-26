@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='0.1 取得程式碼 本書的原始碼可以在GitHub上找到，網址是 https://github.com/dev-cafe/cmake-cookbook 。 開源程式碼遵循MIT許可：只要原始版權和許可聲明包含在軟體/原始碼的任何副本中，可以以任何方式重複使用和重新混合程式碼。 授權的全文可以在 https://opensource.org/licenses/MIT 中看到。
+為了測試原始碼，需要使用Git取得程式碼：
+主要的GNU/Linux發行版都可以透過套件管理器安裝Git。 也可以從Git專案網站 https://gitscm.com 下載二進位發行版，進行安裝。 MacOS上，可使用自製或MacPorts安裝Git。 Windows上，可以從git專案網站( https://git-scm.com )下載git執行安裝檔。 可以透過github桌面用戶端存取這些範例，網址為 https://desktop.github.com 。
+另一個選擇是從 https://github.com/dev-cafe/cmake-cookbook 下載zip檔。
+安裝Git後，可以將遠端庫克隆到本機，如下所示：
+$ git clone https://github.com/dev-cafe/cmake-cookbook.git 這將建立一個名為cmake-cookbook的資料夾。 本書內容與原始碼的章節對應，書中章節的編號和源碼的順序相同。
+在GNU/Linux、MacOS和Windows上，使用最新的持續整合進行測試。 我們會在之後討論測試的設定。
+我們用標籤v1.0標記了與本書中列印的範例相對應的版本。 為了與書中內容對應，可以如下取得此特定版本：
+$ git clone --single-branch -b v1.0 https://github.com/dev-cafe/cmake-cookbook.git 我們希望收到Bug修復，並且Github庫將繼續發展。 若要取得更新，可以選擇庫的master分支。'>
+<title>Cmake</title>
+
+<link rel='canonical' href='https://leo00932302.github.io/post/cmake/cmake/'>
+
+<link rel="stylesheet" href="/scss/style.min.24ef1cc321916467896e8c70c10c0ad7b98c2a8df14298032fb637216e397f50.css"><meta property='og:title' content='Cmake'>
+<meta property='og:description' content='0.1 取得程式碼 本書的原始碼可以在GitHub上找到，網址是 https://github.com/dev-cafe/cmake-cookbook 。 開源程式碼遵循MIT許可：只要原始版權和許可聲明包含在軟體/原始碼的任何副本中，可以以任何方式重複使用和重新混合程式碼。 授權的全文可以在 https://opensource.org/licenses/MIT 中看到。
+為了測試原始碼，需要使用Git取得程式碼：
+主要的GNU/Linux發行版都可以透過套件管理器安裝Git。 也可以從Git專案網站 https://gitscm.com 下載二進位發行版，進行安裝。 MacOS上，可使用自製或MacPorts安裝Git。 Windows上，可以從git專案網站( https://git-scm.com )下載git執行安裝檔。 可以透過github桌面用戶端存取這些範例，網址為 https://desktop.github.com 。
+另一個選擇是從 https://github.com/dev-cafe/cmake-cookbook 下載zip檔。
+安裝Git後，可以將遠端庫克隆到本機，如下所示：
+$ git clone https://github.com/dev-cafe/cmake-cookbook.git 這將建立一個名為cmake-cookbook的資料夾。 本書內容與原始碼的章節對應，書中章節的編號和源碼的順序相同。
+在GNU/Linux、MacOS和Windows上，使用最新的持續整合進行測試。 我們會在之後討論測試的設定。
+我們用標籤v1.0標記了與本書中列印的範例相對應的版本。 為了與書中內容對應，可以如下取得此特定版本：
+$ git clone --single-branch -b v1.0 https://github.com/dev-cafe/cmake-cookbook.git 我們希望收到Bug修復，並且Github庫將繼續發展。 若要取得更新，可以選擇庫的master分支。'>
+<meta property='og:url' content='https://leo00932302.github.io/post/cmake/cmake/'>
+<meta property='og:site_name' content='rui&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='cmake' /><meta property='article:published_time' content='2024-01-27T02:12:31&#43;08:00'/><meta property='article:modified_time' content='2024-01-27T02:12:31&#43;08:00'/>
+<meta name="twitter:title" content="Cmake">
+<meta name="twitter:description" content="0.1 取得程式碼 本書的原始碼可以在GitHub上找到，網址是 https://github.com/dev-cafe/cmake-cookbook 。 開源程式碼遵循MIT許可：只要原始版權和許可聲明包含在軟體/原始碼的任何副本中，可以以任何方式重複使用和重新混合程式碼。 授權的全文可以在 https://opensource.org/licenses/MIT 中看到。
+為了測試原始碼，需要使用Git取得程式碼：
+主要的GNU/Linux發行版都可以透過套件管理器安裝Git。 也可以從Git專案網站 https://gitscm.com 下載二進位發行版，進行安裝。 MacOS上，可使用自製或MacPorts安裝Git。 Windows上，可以從git專案網站( https://git-scm.com )下載git執行安裝檔。 可以透過github桌面用戶端存取這些範例，網址為 https://desktop.github.com 。
+另一個選擇是從 https://github.com/dev-cafe/cmake-cookbook 下載zip檔。
+安裝Git後，可以將遠端庫克隆到本機，如下所示：
+$ git clone https://github.com/dev-cafe/cmake-cookbook.git 這將建立一個名為cmake-cookbook的資料夾。 本書內容與原始碼的章節對應，書中章節的編號和源碼的順序相同。
+在GNU/Linux、MacOS和Windows上，使用最新的持續整合進行測試。 我們會在之後討論測試的設定。
+我們用標籤v1.0標記了與本書中列印的範例相對應的版本。 為了與書中內容對應，可以如下取得此特定版本：
+$ git clone --single-branch -b v1.0 https://github.com/dev-cafe/cmake-cookbook.git 我們希望收到Bug修復，並且Github庫將繼續發展。 若要取得更新，可以選擇庫的master分支。">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切換選單">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huca96465e600737c45c3b5333344678c8_10419120_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rui&#39;s blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>夜晚模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/cmake/cmake/">Cmake</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 27, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    閱讀時間: 1 分鐘
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="01-取得程式碼">0.1 取得程式碼</h1>
+<p>本書的原始碼可以在GitHub上找到，網址是 <a class="link" href="https://github.com/dev-cafe/cmake-cookbook"  target="_blank" rel="noopener"
+    >https://github.com/dev-cafe/cmake-cookbook</a> 。 開源程式碼遵循MIT許可：只要原始版權和許可聲明包含在軟體/原始碼的任何副本中，可以以任何方式重複使用和重新混合程式碼。 授權的全文可以在 <a class="link" href="https://opensource.org/licenses/MIT"  target="_blank" rel="noopener"
+    >https://opensource.org/licenses/MIT</a> 中看到。</p>
+<p>為了測試原始碼，需要使用Git取得程式碼：</p>
+<ul>
+<li>主要的GNU/Linux發行版都可以透過套件管理器安裝Git。 也可以從Git專案網站 <a class="link" href="https://gitscm.com"  target="_blank" rel="noopener"
+    >https://gitscm.com</a> 下載二進位發行版，進行安裝。</li>
+<li>MacOS上，可使用自製或MacPorts安裝Git。</li>
+<li>Windows上，可以從git專案網站( <a class="link" href="https://git-scm.com"  target="_blank" rel="noopener"
+    >https://git-scm.com</a> )下載git執行安裝檔。</li>
+</ul>
+<p>可以透過github桌面用戶端存取這些範例，網址為 <a class="link" href="https://desktop.github.com"  target="_blank" rel="noopener"
+    >https://desktop.github.com</a> 。</p>
+<p>另一個選擇是從 <a class="link" href="https://github.com/dev-cafe/cmake-cookbook"  target="_blank" rel="noopener"
+    >https://github.com/dev-cafe/cmake-cookbook</a> 下載zip檔。</p>
+<p>安裝Git後，可以將遠端庫克隆到本機，如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ git clone https://github.com/dev-cafe/cmake-cookbook.git
+</span></span></code></pre></div><p>這將建立一個名為<code>cmake-cookbook</code>的資料夾。 本書內容與原始碼的章節對應，書中章節的編號和源碼的順序相同。</p>
+<p>在GNU/Linux、MacOS和Windows上，使用最新的持續整合進行測試。 我們會在之後討論測試的設定。</p>
+<p>我們用標籤v1.0標記了與本書中列印的範例相對應的版本。 為了與書中內容對應，可以如下取得此特定版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ git clone --single-branch -b v1.0 https://github.com/dev-cafe/cmake-cookbook.git
+</span></span></code></pre></div><p>我們希望收到Bug修復，並且Github庫將繼續發展。 若要取得更新，可以選擇庫的master分支。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/cmake/">cmake</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 rui&#39;s blog
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 建立 <br />
+        主題 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.21.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 設計
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

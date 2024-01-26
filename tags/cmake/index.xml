@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>cmake on rui&#39;s blog</title>
+        <link>https://leo00932302.github.io/tags/cmake/</link>
+        <description>Recent content in cmake on rui&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Sat, 27 Jan 2024 02:12:31 +0800</lastBuildDate><atom:link href="https://leo00932302.github.io/tags/cmake/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Cmake</title>
+        <link>https://leo00932302.github.io/post/cmake/cmake/</link>
+        <pubDate>Sat, 27 Jan 2024 02:12:31 +0800</pubDate>
+        
+        <guid>https://leo00932302.github.io/post/cmake/cmake/</guid>
+        <description>&lt;h1 id=&#34;01-取得程式碼&#34;&gt;0.1 取得程式碼&lt;/h1&gt;
+&lt;p&gt;本書的原始碼可以在GitHub上找到，網址是 &lt;a class=&#34;link&#34; href=&#34;https://github.com/dev-cafe/cmake-cookbook&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/dev-cafe/cmake-cookbook&lt;/a&gt; 。 開源程式碼遵循MIT許可：只要原始版權和許可聲明包含在軟體/原始碼的任何副本中，可以以任何方式重複使用和重新混合程式碼。 授權的全文可以在 &lt;a class=&#34;link&#34; href=&#34;https://opensource.org/licenses/MIT&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://opensource.org/licenses/MIT&lt;/a&gt; 中看到。&lt;/p&gt;
+&lt;p&gt;為了測試原始碼，需要使用Git取得程式碼：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主要的GNU/Linux發行版都可以透過套件管理器安裝Git。 也可以從Git專案網站 &lt;a class=&#34;link&#34; href=&#34;https://gitscm.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://gitscm.com&lt;/a&gt; 下載二進位發行版，進行安裝。&lt;/li&gt;
+&lt;li&gt;MacOS上，可使用自製或MacPorts安裝Git。&lt;/li&gt;
+&lt;li&gt;Windows上，可以從git專案網站( &lt;a class=&#34;link&#34; href=&#34;https://git-scm.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://git-scm.com&lt;/a&gt; )下載git執行安裝檔。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以透過github桌面用戶端存取這些範例，網址為 &lt;a class=&#34;link&#34; href=&#34;https://desktop.github.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://desktop.github.com&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;另一個選擇是從 &lt;a class=&#34;link&#34; href=&#34;https://github.com/dev-cafe/cmake-cookbook&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/dev-cafe/cmake-cookbook&lt;/a&gt; 下載zip檔。&lt;/p&gt;
+&lt;p&gt;安裝Git後，可以將遠端庫克隆到本機，如下所示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ git clone https://github.com/dev-cafe/cmake-cookbook.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這將建立一個名為&lt;code&gt;cmake-cookbook&lt;/code&gt;的資料夾。 本書內容與原始碼的章節對應，書中章節的編號和源碼的順序相同。&lt;/p&gt;
+&lt;p&gt;在GNU/Linux、MacOS和Windows上，使用最新的持續整合進行測試。 我們會在之後討論測試的設定。&lt;/p&gt;
+&lt;p&gt;我們用標籤v1.0標記了與本書中列印的範例相對應的版本。 為了與書中內容對應，可以如下取得此特定版本：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ git clone --single-branch -b v1.0 https://github.com/dev-cafe/cmake-cookbook.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我們希望收到Bug修復，並且Github庫將繼續發展。 若要取得更新，可以選擇庫的master分支。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
