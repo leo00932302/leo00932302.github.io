@@ -275,7 +275,12 @@ $ &lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/downloads&#34;  targe
         <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
         
         <guid>https://leo00932302.github.io/page/about/</guid>
-        <description></description>
+        <description>&lt;p&gt;若有問題可以將問題寄到我的信箱:leo00932302@gmail.com
+若有時間會回復，網站內容也是不定期更新，要看我的時間跟心情
+再來應該會更新用GDB來debug的方法，以及說明如何編譯多個元文件的方法
+之後也想寫寫機器學習的文章，應該會先用pytorch來寫，有時間會補tensorflow
+也會更新一些練習用的小程式，應該會以C/C++為主，我也不確定&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>Links</title>
