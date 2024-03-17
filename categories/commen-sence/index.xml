@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>commen sence on rui&#39;s blog</title>
+        <link>https://leo00932302.github.io/categories/commen-sence/</link>
+        <description>Recent content in commen sence on rui&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Sat, 27 Jan 2024 02:12:31 +0800</lastBuildDate><atom:link href="https://leo00932302.github.io/categories/commen-sence/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>commen sence</title>
+        <link>https://leo00932302.github.io/post/commen-sence/</link>
+        <pubDate>Sat, 27 Jan 2024 02:12:31 +0800</pubDate>
+        
+        <guid>https://leo00932302.github.io/post/commen-sence/</guid>
+        <description>&lt;h1 id=&#34;常見資料夾命名&#34;&gt;常見資料夾命名&lt;/h1&gt;
+&lt;h2 id=&#34;utils&#34;&gt;utils&lt;/h2&gt;
+&lt;p&gt;通常用來放置一些通用文件，可在多個專案重複使用，提升開發效率。&lt;/p&gt;
+&lt;h2 id=&#34;src&#34;&gt;src&lt;/h2&gt;
+&lt;p&gt;指source code，裡面用來存放專案的程式碼。&lt;/p&gt;
+&lt;h2 id=&#34;lib&#34;&gt;lib&lt;/h2&gt;
+&lt;p&gt;library,用來存放庫。&lt;/p&gt;
+&lt;h2 id=&#34;dist&#34;&gt;dist&lt;/h2&gt;
+&lt;p&gt;distribution，用來放編譯過後的文件。&lt;/p&gt;
+&lt;h2 id=&#34;build&#34;&gt;build&lt;/h2&gt;
+&lt;p&gt;放置構建後的文件。&lt;/p&gt;
+&lt;h2 id=&#34;config&#34;&gt;config&lt;/h2&gt;
+&lt;p&gt;存放一些基本設定，像是編譯方式之類的。&lt;/p&gt;
+&lt;h2 id=&#34;assets&#34;&gt;assets&lt;/h2&gt;
+&lt;p&gt;存放一些專案會用到的圖片。&lt;/p&gt;
+&lt;h2 id=&#34;exampledemo&#34;&gt;example,demo&lt;/h2&gt;
+&lt;p&gt;用來放專案的使用範例，可以在一些庫的裡面發現。&lt;/p&gt;
+&lt;h2 id=&#34;bin&#34;&gt;bin&lt;/h2&gt;
+&lt;p&gt;命令腳本，若使用命令工具會遇到，有些需要加入windows環境變數，用來操作command line。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

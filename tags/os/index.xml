@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>os on rui&#39;s blog</title>
+        <link>https://leo00932302.github.io/tags/os/</link>
+        <description>Recent content in os on rui&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Wed, 31 Jan 2024 00:08:50 +0800</lastBuildDate><atom:link href="https://leo00932302.github.io/tags/os/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>作業系統</title>
+        <link>https://leo00932302.github.io/post/os/</link>
+        <pubDate>Wed, 31 Jan 2024 00:08:50 +0800</pubDate>
+        
+        <guid>https://leo00932302.github.io/post/os/</guid>
+        <description>&lt;h1 id=&#34;作業系統簡介&#34;&gt;作業系統簡介&lt;/h1&gt;
+&lt;p&gt;此網站為作業系統的筆記，涵蓋每個單元，包含附錄。&lt;/p&gt;
+&lt;h2 id=&#34;第一章&#34;&gt;第一章&lt;/h2&gt;
+&lt;h2 id=&#34;第二章&#34;&gt;第二章&lt;/h2&gt;
+&lt;h2 id=&#34;第三章&#34;&gt;第三章&lt;/h2&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

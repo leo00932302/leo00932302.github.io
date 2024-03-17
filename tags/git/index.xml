@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>git on rui&#39;s blog</title>
+        <link>https://leo00932302.github.io/tags/git/</link>
+        <description>Recent content in git on rui&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-tw</language>
+        <lastBuildDate>Sat, 27 Jan 2024 02:12:31 +0800</lastBuildDate><atom:link href="https://leo00932302.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>git tutorial</title>
+        <link>https://leo00932302.github.io/post/git/</link>
+        <pubDate>Sat, 27 Jan 2024 02:12:31 +0800</pubDate>
+        
+        <guid>https://leo00932302.github.io/post/git/</guid>
+        <description>&lt;h1 id=&#34;學習如何使用git的各種命令和概念&#34;&gt;學習如何使用git的各種命令和概念&lt;/h1&gt;
+&lt;h2 id=&#34;git簡介&#34;&gt;git簡介&lt;/h2&gt;
+&lt;p&gt;git是一種版本管理工具，在寫程式時可以像玩遊戲一樣設立存檔點，方便日後程式出問題時有機會回復到之前的某個狀態，也方便團隊做開發，對大一點
+的程式尤為重要，其中又些更複雜的觀念，熟悉後才可提高日後的開發和協作效率。&lt;/p&gt;
+&lt;h2 id=&#34;git-下載&#34;&gt;git 下載&lt;/h2&gt;
+&lt;p&gt;須先下載:
+$ &lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/downloads&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://git-scm.com/downloads&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;git基本命令未考慮github時&#34;&gt;git基本命令(未考慮github時)&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; git add.
+&lt;/code&gt;&lt;/pre&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
