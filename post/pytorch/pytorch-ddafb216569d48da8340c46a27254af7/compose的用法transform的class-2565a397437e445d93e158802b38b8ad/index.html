@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Compose的用法(transform的class) 屬於transforms裡的一種class，可以將資料處理方式包裝在裡面，以列表方式依序執行，就不用寫這麼多步驟了(Args:list of transform object)，因為list所以要中括號 可將resize,totensor,normalize放在裡面，所述入的引數均為class object的數據類型儘量保持一致，不要一下PIL一下又變成tensor 這裡一樣是說明如何將圖片轉換成tensor並且修改尺寸 #之前一樣要宣告totensor,resize trans_totensor = transforms.ToTensor() trans_norm = transforms.Normalize([0.5,0.5,0.5],[0.5,0.5,0.5]) trans_resize = transforms.Resize((512,512)) #對compose的class做初始化設定 trans_compose = transforms.Compose([trans_totensor,trans_norm,trans_resize]) '>
+<title>pytorch</title>
+
+<link rel='canonical' href='https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/compose%E7%9A%84%E7%94%A8%E6%B3%95transform%E7%9A%84class-2565a397437e445d93e158802b38b8ad/'>
+
+<link rel="stylesheet" href="/scss/style.min.24ef1cc321916467896e8c70c10c0ad7b98c2a8df14298032fb637216e397f50.css"><meta property='og:title' content='pytorch'>
+<meta property='og:description' content='Compose的用法(transform的class) 屬於transforms裡的一種class，可以將資料處理方式包裝在裡面，以列表方式依序執行，就不用寫這麼多步驟了(Args:list of transform object)，因為list所以要中括號 可將resize,totensor,normalize放在裡面，所述入的引數均為class object的數據類型儘量保持一致，不要一下PIL一下又變成tensor 這裡一樣是說明如何將圖片轉換成tensor並且修改尺寸 #之前一樣要宣告totensor,resize trans_totensor = transforms.ToTensor() trans_norm = transforms.Normalize([0.5,0.5,0.5],[0.5,0.5,0.5]) trans_resize = transforms.Resize((512,512)) #對compose的class做初始化設定 trans_compose = transforms.Compose([trans_totensor,trans_norm,trans_resize]) '>
+<meta property='og:url' content='https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/compose%E7%9A%84%E7%94%A8%E6%B3%95transform%E7%9A%84class-2565a397437e445d93e158802b38b8ad/'>
+<meta property='og:site_name' content='rui&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='pytorch' /><meta property='article:published_time' content='2024-01-27T02:12:31&#43;08:00'/><meta property='article:modified_time' content='2024-01-27T02:12:31&#43;08:00'/>
+<meta name="twitter:title" content="pytorch">
+<meta name="twitter:description" content="Compose的用法(transform的class) 屬於transforms裡的一種class，可以將資料處理方式包裝在裡面，以列表方式依序執行，就不用寫這麼多步驟了(Args:list of transform object)，因為list所以要中括號 可將resize,totensor,normalize放在裡面，所述入的引數均為class object的數據類型儘量保持一致，不要一下PIL一下又變成tensor 這裡一樣是說明如何將圖片轉換成tensor並且修改尺寸 #之前一樣要宣告totensor,resize trans_totensor = transforms.ToTensor() trans_norm = transforms.Normalize([0.5,0.5,0.5],[0.5,0.5,0.5]) trans_resize = transforms.Resize((512,512)) #對compose的class做初始化設定 trans_compose = transforms.Compose([trans_totensor,trans_norm,trans_resize]) ">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切換選單">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huca96465e600737c45c3b5333344678c8_10419120_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rui&#39;s blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>夜晚模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/compose%E7%9A%84%E7%94%A8%E6%B3%95transform%E7%9A%84class-2565a397437e445d93e158802b38b8ad/">pytorch</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 27, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    閱讀時間: 1 分鐘
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="compose的用法transform的class">Compose的用法(transform的class)</h1>
+<ul>
+<li>屬於transforms裡的一種class，可以將資料處理方式包裝在裡面，以列表方式依序執行，就不用寫這麼多步驟了(Args:list of transform object)，因為list所以要中括號</li>
+<li>可將resize,totensor,normalize放在裡面，所述入的引數均為class</li>
+<li>object的數據類型儘量保持一致，不要一下PIL一下又變成tensor</li>
+<li>這裡一樣是說明如何將圖片轉換成tensor並且修改尺寸</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#之前一樣要宣告totensor,resize</span>
+</span></span><span style="display:flex;"><span>trans_totensor <span style="color:#f92672">=</span> transforms<span style="color:#f92672">.</span>ToTensor()
+</span></span><span style="display:flex;"><span>trans_norm <span style="color:#f92672">=</span> transforms<span style="color:#f92672">.</span>Normalize([<span style="color:#ae81ff">0.5</span>,<span style="color:#ae81ff">0.5</span>,<span style="color:#ae81ff">0.5</span>],[<span style="color:#ae81ff">0.5</span>,<span style="color:#ae81ff">0.5</span>,<span style="color:#ae81ff">0.5</span>])
+</span></span><span style="display:flex;"><span>trans_resize <span style="color:#f92672">=</span> transforms<span style="color:#f92672">.</span>Resize((<span style="color:#ae81ff">512</span>,<span style="color:#ae81ff">512</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#對compose的class做初始化設定</span>
+</span></span><span style="display:flex;"><span>trans_compose <span style="color:#f92672">=</span> transforms<span style="color:#f92672">.</span>Compose([trans_totensor,trans_norm,trans_resize])
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/pytorch/">pytorch</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相關文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E6%B1%A0%E5%8C%96%E5%B1%A4pooling-layers-64f5836035104538aca6ecfcf11d84eb/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/pytprch%E5%85%A7%E5%BB%BAdataset%E7%9A%84%E4%BD%BF%E7%94%A8-a6ba7d74c2b942508f822e3d387de155/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dataset%E7%9A%84%E8%A3%BD%E4%BD%9C%E5%8F%AF%E4%BB%A5%E5%BE%9E%E9%80%99%E8%A3%A1%E9%96%8B%E5%A7%8B%E7%9C%8B%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81-302063e805d74a48bbdf113ba8cb17fe/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E9%9D%9E%E7%B7%9A%E6%80%A7%E6%BF%80%E6%B4%BB-11b4c2014a504f1795a8dc7e736d9daf/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/transform-7fac7412a4944a2aae5bf9b8c4974304/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 rui&#39;s blog
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 建立 <br />
+        主題 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.21.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 設計
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

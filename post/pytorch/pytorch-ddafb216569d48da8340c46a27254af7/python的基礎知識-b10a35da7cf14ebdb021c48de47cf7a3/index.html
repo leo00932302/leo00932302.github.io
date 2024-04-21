@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='python的基礎知識 基礎的資料儲存方式 list 是一種class，裡面定義了很多方法
+list.append(x):將x加到list後面
+list.insert(i,x):第一個為索引值，將x加到第i個digits
+a.inset(len(a),x)代表的和list.append(x)一樣意思 list.remove(x):刪除list中第一個為x的元素，若是沒有會出現ValueError
+list.clear():刪除list中所有元素
+list.count(x):x在list中出現次數
+list.reverse():將所有元素前後反轉
+list.sort():list進行排序
+list.replace(”L”,”l”):將字串中的L替換成l
+字串完成後前方加上(int)可以將字串轉換成整數(也可以用float)
+list1 = input(&amp;#34;please enter a number&amp;#34;) list2 = input(&amp;#34;please enter a number&amp;#34;) print(list1&#43;list2) #若輸入3,5，出來會變成35 #要改成這樣: print((int)list1&#43;(int)list2) 若是字串輸出: list1 = [&amp;#34;hello&amp;#34;,&amp;#34;HI&amp;#34;,&amp;#34;你好&amp;#34;] print(list1[0]) #輸出hello print(list[0:]) #從0輸出到最後一個數 關於[:]的用法(切片操作): list = {&amp;#34;h&amp;#34;,&amp;#34;e&amp;#34;,&amp;#34;l&amp;#34;,&amp;#34;l&amp;#34;,&amp;#34;o&amp;#34;} #list[i:j]指的是讀取list下標i到j的元素，且從0開始算 #若是i省略會被0取代；若是j省略會被len(list)取代，也就是會變成list長度 #[:j]此時也代表0到j之前的元素才會被讀取，不包含j，若是j為3會輸出hel(非常莫名其妙，要特別理解) #若是使用[3:]代表讀取第四個元素到最後一個元素 Tuples 和list的用法很像，只是存放時是用小括號 Dictionary 跟list使用數字當索引不同，他的索引可以是數字或是字串等等，比較像是set的概念 物件導向 基礎寫法: class MyData(Dataset): def __init__(self, root_dir, image_dir, label_dir, transform=None): self.root_dir = root_dir self.image_dir = image_dir self.label_dir = label_dir self.label_path = os.'>
+<title>pytorch</title>
+
+<link rel='canonical' href='https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/python%E7%9A%84%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-b10a35da7cf14ebdb021c48de47cf7a3/'>
+
+<link rel="stylesheet" href="/scss/style.min.24ef1cc321916467896e8c70c10c0ad7b98c2a8df14298032fb637216e397f50.css"><meta property='og:title' content='pytorch'>
+<meta property='og:description' content='python的基礎知識 基礎的資料儲存方式 list 是一種class，裡面定義了很多方法
+list.append(x):將x加到list後面
+list.insert(i,x):第一個為索引值，將x加到第i個digits
+a.inset(len(a),x)代表的和list.append(x)一樣意思 list.remove(x):刪除list中第一個為x的元素，若是沒有會出現ValueError
+list.clear():刪除list中所有元素
+list.count(x):x在list中出現次數
+list.reverse():將所有元素前後反轉
+list.sort():list進行排序
+list.replace(”L”,”l”):將字串中的L替換成l
+字串完成後前方加上(int)可以將字串轉換成整數(也可以用float)
+list1 = input(&amp;#34;please enter a number&amp;#34;) list2 = input(&amp;#34;please enter a number&amp;#34;) print(list1&#43;list2) #若輸入3,5，出來會變成35 #要改成這樣: print((int)list1&#43;(int)list2) 若是字串輸出: list1 = [&amp;#34;hello&amp;#34;,&amp;#34;HI&amp;#34;,&amp;#34;你好&amp;#34;] print(list1[0]) #輸出hello print(list[0:]) #從0輸出到最後一個數 關於[:]的用法(切片操作): list = {&amp;#34;h&amp;#34;,&amp;#34;e&amp;#34;,&amp;#34;l&amp;#34;,&amp;#34;l&amp;#34;,&amp;#34;o&amp;#34;} #list[i:j]指的是讀取list下標i到j的元素，且從0開始算 #若是i省略會被0取代；若是j省略會被len(list)取代，也就是會變成list長度 #[:j]此時也代表0到j之前的元素才會被讀取，不包含j，若是j為3會輸出hel(非常莫名其妙，要特別理解) #若是使用[3:]代表讀取第四個元素到最後一個元素 Tuples 和list的用法很像，只是存放時是用小括號 Dictionary 跟list使用數字當索引不同，他的索引可以是數字或是字串等等，比較像是set的概念 物件導向 基礎寫法: class MyData(Dataset): def __init__(self, root_dir, image_dir, label_dir, transform=None): self.root_dir = root_dir self.image_dir = image_dir self.label_dir = label_dir self.label_path = os.'>
+<meta property='og:url' content='https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/python%E7%9A%84%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-b10a35da7cf14ebdb021c48de47cf7a3/'>
+<meta property='og:site_name' content='rui&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='pytorch' /><meta property='article:published_time' content='2024-01-27T02:12:31&#43;08:00'/><meta property='article:modified_time' content='2024-01-27T02:12:31&#43;08:00'/>
+<meta name="twitter:title" content="pytorch">
+<meta name="twitter:description" content="python的基礎知識 基礎的資料儲存方式 list 是一種class，裡面定義了很多方法
+list.append(x):將x加到list後面
+list.insert(i,x):第一個為索引值，將x加到第i個digits
+a.inset(len(a),x)代表的和list.append(x)一樣意思 list.remove(x):刪除list中第一個為x的元素，若是沒有會出現ValueError
+list.clear():刪除list中所有元素
+list.count(x):x在list中出現次數
+list.reverse():將所有元素前後反轉
+list.sort():list進行排序
+list.replace(”L”,”l”):將字串中的L替換成l
+字串完成後前方加上(int)可以將字串轉換成整數(也可以用float)
+list1 = input(&amp;#34;please enter a number&amp;#34;) list2 = input(&amp;#34;please enter a number&amp;#34;) print(list1&#43;list2) #若輸入3,5，出來會變成35 #要改成這樣: print((int)list1&#43;(int)list2) 若是字串輸出: list1 = [&amp;#34;hello&amp;#34;,&amp;#34;HI&amp;#34;,&amp;#34;你好&amp;#34;] print(list1[0]) #輸出hello print(list[0:]) #從0輸出到最後一個數 關於[:]的用法(切片操作): list = {&amp;#34;h&amp;#34;,&amp;#34;e&amp;#34;,&amp;#34;l&amp;#34;,&amp;#34;l&amp;#34;,&amp;#34;o&amp;#34;} #list[i:j]指的是讀取list下標i到j的元素，且從0開始算 #若是i省略會被0取代；若是j省略會被len(list)取代，也就是會變成list長度 #[:j]此時也代表0到j之前的元素才會被讀取，不包含j，若是j為3會輸出hel(非常莫名其妙，要特別理解) #若是使用[3:]代表讀取第四個元素到最後一個元素 Tuples 和list的用法很像，只是存放時是用小括號 Dictionary 跟list使用數字當索引不同，他的索引可以是數字或是字串等等，比較像是set的概念 物件導向 基礎寫法: class MyData(Dataset): def __init__(self, root_dir, image_dir, label_dir, transform=None): self.root_dir = root_dir self.image_dir = image_dir self.label_dir = label_dir self.label_path = os.">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切換選單">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huca96465e600737c45c3b5333344678c8_10419120_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rui&#39;s blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>夜晚模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/python%E7%9A%84%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-b10a35da7cf14ebdb021c48de47cf7a3/">pytorch</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 27, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    閱讀時間: 1 分鐘
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="python的基礎知識">python的基礎知識</h1>
+<h1 id="基礎的資料儲存方式">基礎的資料儲存方式</h1>
+<h2 id="list">list</h2>
+<ul>
+<li>
+<p>是一種class，裡面定義了很多方法</p>
+</li>
+<li>
+<p>list.append(x):將x加到list後面</p>
+</li>
+<li>
+<p>list.insert(i,x):第一個為索引值，將x加到第i個digits</p>
+<pre><code>a.inset(len(a),x)代表的和list.append(x)一樣意思
+</code></pre>
+</li>
+<li>
+<p>list.remove(x):刪除list中第一個為x的元素，若是沒有會出現ValueError</p>
+</li>
+<li>
+<p>list.clear():刪除list中所有元素</p>
+</li>
+<li>
+<p>list.count(x):x在list中出現次數</p>
+</li>
+<li>
+<p>list.reverse():將所有元素前後反轉</p>
+</li>
+<li>
+<p>list.sort():list進行排序</p>
+</li>
+<li>
+<p>list.replace(”L”,”l”):將字串中的L替換成l</p>
+</li>
+<li>
+<p>字串完成後前方加上(int)可以將字串轉換成整數(也可以用float)</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>list1 <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;please enter a number&#34;</span>)
+</span></span><span style="display:flex;"><span>list2 <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;please enter a number&#34;</span>)
+</span></span><span style="display:flex;"><span>print(list1<span style="color:#f92672">+</span>list2)  <span style="color:#75715e">#若輸入3,5，出來會變成35</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#要改成這樣:</span>
+</span></span><span style="display:flex;"><span>print((int)list1<span style="color:#f92672">+</span>(int)list2)
+</span></span></code></pre></div><ul>
+<li>若是字串輸出:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>list1 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;hello&#34;</span>,<span style="color:#e6db74">&#34;HI&#34;</span>,<span style="color:#e6db74">&#34;你好&#34;</span>]
+</span></span><span style="display:flex;"><span>print(list1[<span style="color:#ae81ff">0</span>]) <span style="color:#75715e">#輸出hello</span>
+</span></span><span style="display:flex;"><span>print(list[<span style="color:#ae81ff">0</span>:]) <span style="color:#75715e">#從0輸出到最後一個數</span>
+</span></span></code></pre></div><ul>
+<li>關於[:]的用法(切片操作):</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>list <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;h&#34;</span>,<span style="color:#e6db74">&#34;e&#34;</span>,<span style="color:#e6db74">&#34;l&#34;</span>,<span style="color:#e6db74">&#34;l&#34;</span>,<span style="color:#e6db74">&#34;o&#34;</span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#list[i:j]指的是讀取list下標i到j的元素，且從0開始算</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#若是i省略會被0取代；若是j省略會被len(list)取代，也就是會變成list長度</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[:j]此時也代表0到j之前的元素才會被讀取，不包含j，若是j為3會輸出hel(非常莫名其妙，要特別理解)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#若是使用[3:]代表讀取第四個元素到最後一個元素</span>
+</span></span></code></pre></div><p><img src="/python%E7%9A%84%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98%20b10a35da7cf14ebdb021c48de47cf7a3/Untitled.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<h2 id="tuples">Tuples</h2>
+<ul>
+<li>和list的用法很像，只是存放時是用小括號</li>
+<li></li>
+</ul>
+<h2 id="dictionary">Dictionary</h2>
+<ul>
+<li>跟list使用數字當索引不同，他的索引可以是數字或是字串等等，比較像是set的概念</li>
+</ul>
+<h1 id="物件導向">物件導向</h1>
+<h2 id="基礎寫法">基礎寫法:</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyData</span>(Dataset):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, root_dir, image_dir, label_dir, transform<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>root_dir <span style="color:#f92672">=</span> root_dir
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>image_dir <span style="color:#f92672">=</span> image_dir
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>label_dir <span style="color:#f92672">=</span> label_dir
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>label_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>root_dir, self<span style="color:#f92672">.</span>label_dir)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>image_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>root_dir, self<span style="color:#f92672">.</span>image_dir)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>image_list <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(self<span style="color:#f92672">.</span>image_path)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>label_list <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(self<span style="color:#f92672">.</span>label_path)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>transform <span style="color:#f92672">=</span> transform
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 因为label 和 Image文件名相同，进行一样的排序，可以保证取出的数据和label是一一对应的</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>image_list<span style="color:#f92672">.</span>sort()
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>label_list<span style="color:#f92672">.</span>sort()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __getitem__(self, idx):
+</span></span><span style="display:flex;"><span>        img_name <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>image_list[idx]
+</span></span><span style="display:flex;"><span>        label_name <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>label_list[idx]
+</span></span><span style="display:flex;"><span>        img_item_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>root_dir, self<span style="color:#f92672">.</span>image_dir, img_name)
+</span></span><span style="display:flex;"><span>        label_item_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>root_dir, self<span style="color:#f92672">.</span>label_dir, label_name)
+</span></span><span style="display:flex;"><span>        img <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(img_item_path)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> open(label_item_path, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>            label <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>readline()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>transform:
+</span></span><span style="display:flex;"><span>            img <span style="color:#f92672">=</span> transform(img)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> img, label
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __len__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">assert</span> len(self<span style="color:#f92672">.</span>image_list) <span style="color:#f92672">==</span> len(self<span style="color:#f92672">.</span>label_list)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> len(self<span style="color:#f92672">.</span>image_list)
+</span></span></code></pre></div><ul>
+<li>magic method(special method):像是__init__,<strong>getitem</strong>,__len__就是這一種，python裡面有建立，有特殊的使用方法，像是init的功能是初始化變數(可以理解成建構子)，定義物件中(object)可有哪些變數可被存取，建立class一定要有這個函數。</li>
+<li>the object is the instance of the class:還沒宣告之前都是class，宣告以後就變成object，有加上self(C中為this)才會知道那些變數可以被存取，這些算是object的變數，若是沒有加上self就不能被存取，這些算是class的變數，而且python比較特別，class裡面包裝的不只有function還有變數，可以同時兼顧功能跟資料型態的包裝。不像是C有分成struct跟class，將方法跟儲存分開。</li>
+<li>class後面的括號通常默認是object，若是用別的class名字代替，代表繼承，此時這個class可以使用括號裡面的class的函數跟變數，此時自己稱作子類別，給予的稱作父類別。若是變數不想被繼承，可以在函數或變數之前寫”__variable”，代表private。</li>
+</ul>
+<p>ref:<a class="link" href="https://docs.python.org/zh-tw/3/tutorial/datastructures.html#dictionaries"  target="_blank" rel="noopener"
+    >https://docs.python.org/zh-tw/3/tutorial/datastructures.html#dictionaries</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/pytorch/">pytorch</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相關文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E9%9D%9E%E7%B7%9A%E6%80%A7%E6%BF%80%E6%B4%BB-11b4c2014a504f1795a8dc7e736d9daf/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/cnnpython-fab8b1dd0a7b4f46ac8ea5f6abce5269/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dnndeep-learning-809b1debc15f4d09a236679e079deb19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dnndeep-learning-809b1debc15f4d09a236679e079deb19/dnnpython-55cc8a1c4d444ac9927be40fdab694ca/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/svm-840bfe110f9646308b665cf148333537/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 rui&#39;s blog
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 建立 <br />
+        主題 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.21.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 設計
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

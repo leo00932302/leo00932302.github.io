@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='卷積層(Convolution Layers) 目的:卷積層是捲積神經網絡的核心，可提取圖片特徵值。 在捲積層經過掃描運算後會得到一張特徵圖(Feature Map)，特徵圖反映了在原始圖像中不同位置的特徵。 剩下兩層分別是池化層(Pooling Layer)和全連接層(Fully Connected Layer)。 卷積層(Convolution Layers)設定 nn.Conv2d:處理2維資料(較常用) Conv2d 參數: in_channels(int):輸入的通道數
+out_chennels(int):輸出的通道數，若是輸出兩個，則生成兩個卷積核，然後做疊加
+kernel_size(int or tuple):卷積核的大小，例如:設定2則出現2*2的卷積核
+stride(int or tuple):卷積過程中單次移動的路徑
+padding(int,tuples or str):是否需要針對圖片邊緣進行填充default:0
+dialation(int or tuple):default:1
+groups(int):通常設1
+bias(bool):卷積做完後是否加上一個數字(模型自己會算)，通常True
+padding_mode(str):padding為True時決定以甚麼樣的模式填充，default為’zeros’(replacements:&#39;zeros&#39;, &#39;reflect&#39;, &#39;replicate&#39; or &#39;circular&#39;)
+原理: 動畫示範:https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md
+modules的使用方式: import torchvision from torch import nn from torch.utils.data import DataLoader dataset_transform = torchvision.transforms.Compose([ torchvision.transforms.ToTensor() ]) dataset = torchvision.datasets.CIFAR10(root=&amp;#34;./dataset&amp;#34;,train=False,transform=dataset_transform,download=False) data_loader = DataLoader(dataset=dataset,batch_size=64,shuffle=True,num_workers=0,drop_last=False) #初始化container class mymodules(nn.Module): def __init__(self): super(mymodules,self).__init__() self.conv1 = nn.Conv2d(in_channels=3,out_channels=6,kernel_size=3,stride=1,padding=0) def forward(self, x): x = self.'>
+<title>pytorch</title>
+
+<link rel='canonical' href='https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E5%8D%B7%E7%A9%8D%E5%B1%A4convolution-layers-a66f75d937f44302a2aa191082ffe5c6/'>
+
+<link rel="stylesheet" href="/scss/style.min.24ef1cc321916467896e8c70c10c0ad7b98c2a8df14298032fb637216e397f50.css"><meta property='og:title' content='pytorch'>
+<meta property='og:description' content='卷積層(Convolution Layers) 目的:卷積層是捲積神經網絡的核心，可提取圖片特徵值。 在捲積層經過掃描運算後會得到一張特徵圖(Feature Map)，特徵圖反映了在原始圖像中不同位置的特徵。 剩下兩層分別是池化層(Pooling Layer)和全連接層(Fully Connected Layer)。 卷積層(Convolution Layers)設定 nn.Conv2d:處理2維資料(較常用) Conv2d 參數: in_channels(int):輸入的通道數
+out_chennels(int):輸出的通道數，若是輸出兩個，則生成兩個卷積核，然後做疊加
+kernel_size(int or tuple):卷積核的大小，例如:設定2則出現2*2的卷積核
+stride(int or tuple):卷積過程中單次移動的路徑
+padding(int,tuples or str):是否需要針對圖片邊緣進行填充default:0
+dialation(int or tuple):default:1
+groups(int):通常設1
+bias(bool):卷積做完後是否加上一個數字(模型自己會算)，通常True
+padding_mode(str):padding為True時決定以甚麼樣的模式填充，default為’zeros’(replacements:&#39;zeros&#39;, &#39;reflect&#39;, &#39;replicate&#39; or &#39;circular&#39;)
+原理: 動畫示範:https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md
+modules的使用方式: import torchvision from torch import nn from torch.utils.data import DataLoader dataset_transform = torchvision.transforms.Compose([ torchvision.transforms.ToTensor() ]) dataset = torchvision.datasets.CIFAR10(root=&amp;#34;./dataset&amp;#34;,train=False,transform=dataset_transform,download=False) data_loader = DataLoader(dataset=dataset,batch_size=64,shuffle=True,num_workers=0,drop_last=False) #初始化container class mymodules(nn.Module): def __init__(self): super(mymodules,self).__init__() self.conv1 = nn.Conv2d(in_channels=3,out_channels=6,kernel_size=3,stride=1,padding=0) def forward(self, x): x = self.'>
+<meta property='og:url' content='https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E5%8D%B7%E7%A9%8D%E5%B1%A4convolution-layers-a66f75d937f44302a2aa191082ffe5c6/'>
+<meta property='og:site_name' content='rui&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='pytorch' /><meta property='article:published_time' content='2024-01-27T02:12:31&#43;08:00'/><meta property='article:modified_time' content='2024-01-27T02:12:31&#43;08:00'/>
+<meta name="twitter:title" content="pytorch">
+<meta name="twitter:description" content="卷積層(Convolution Layers) 目的:卷積層是捲積神經網絡的核心，可提取圖片特徵值。 在捲積層經過掃描運算後會得到一張特徵圖(Feature Map)，特徵圖反映了在原始圖像中不同位置的特徵。 剩下兩層分別是池化層(Pooling Layer)和全連接層(Fully Connected Layer)。 卷積層(Convolution Layers)設定 nn.Conv2d:處理2維資料(較常用) Conv2d 參數: in_channels(int):輸入的通道數
+out_chennels(int):輸出的通道數，若是輸出兩個，則生成兩個卷積核，然後做疊加
+kernel_size(int or tuple):卷積核的大小，例如:設定2則出現2*2的卷積核
+stride(int or tuple):卷積過程中單次移動的路徑
+padding(int,tuples or str):是否需要針對圖片邊緣進行填充default:0
+dialation(int or tuple):default:1
+groups(int):通常設1
+bias(bool):卷積做完後是否加上一個數字(模型自己會算)，通常True
+padding_mode(str):padding為True時決定以甚麼樣的模式填充，default為’zeros’(replacements:&#39;zeros&#39;, &#39;reflect&#39;, &#39;replicate&#39; or &#39;circular&#39;)
+原理: 動畫示範:https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md
+modules的使用方式: import torchvision from torch import nn from torch.utils.data import DataLoader dataset_transform = torchvision.transforms.Compose([ torchvision.transforms.ToTensor() ]) dataset = torchvision.datasets.CIFAR10(root=&amp;#34;./dataset&amp;#34;,train=False,transform=dataset_transform,download=False) data_loader = DataLoader(dataset=dataset,batch_size=64,shuffle=True,num_workers=0,drop_last=False) #初始化container class mymodules(nn.Module): def __init__(self): super(mymodules,self).__init__() self.conv1 = nn.Conv2d(in_channels=3,out_channels=6,kernel_size=3,stride=1,padding=0) def forward(self, x): x = self.">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切換選單">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huca96465e600737c45c3b5333344678c8_10419120_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rui&#39;s blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>夜晚模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E5%8D%B7%E7%A9%8D%E5%B1%A4convolution-layers-a66f75d937f44302a2aa191082ffe5c6/">pytorch</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 27, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    閱讀時間: 1 分鐘
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="卷積層convolution-layers">卷積層(Convolution Layers)</h1>
+<ul>
+<li>目的:卷積層是捲積神經網絡的核心，可提取圖片特徵值。</li>
+<li>在捲積層經過掃描運算後會得到一張特徵圖(Feature Map)，特徵圖反映了在原始圖像中不同位置的特徵。</li>
+</ul>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%201.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<ul>
+<li>剩下兩層分別是池化層(Pooling Layer)和全連接層(Fully Connected Layer)。</li>
+</ul>
+<h1 id="卷積層convolution-layers設定">卷積層(Convolution Layers)設定</h1>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%202.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<ul>
+<li>nn.Conv2d:處理2維資料(較常用)</li>
+</ul>
+<h2 id="conv2d">Conv2d</h2>
+<ul>
+<li>參數:</li>
+</ul>
+<p>in_channels(int):輸入的通道數</p>
+<p>out_chennels(int):輸出的通道數，若是輸出兩個，則生成兩個卷積核，然後做疊加</p>
+<p>kernel_size(int or tuple):卷積核的大小，例如:設定2則出現2*2的卷積核</p>
+<p>stride(int or tuple):卷積過程中單次移動的路徑</p>
+<p>padding(int,tuples or str):是否需要針對圖片邊緣進行填充default:0</p>
+<p>dialation(int or tuple):default:1</p>
+<p>groups(int):通常設1</p>
+<p>bias(bool):卷積做完後是否加上一個數字(模型自己會算)，通常True</p>
+<p>padding_mode(str):padding為True時決定以甚麼樣的模式填充，default為’zeros’(replacements:<strong><code>'zeros'</code>, <code>'reflect'</code>, <code>'replicate'</code> or <code>'circular'</code></strong>)</p>
+<ul>
+<li>原理:</li>
+</ul>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%203.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<p>動畫示範:<a class="link" href="https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md"  target="_blank" rel="noopener"
+    >https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md</a></p>
+<ul>
+<li>modules的使用方式:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> torchvision
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torch <span style="color:#f92672">import</span> nn
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.data <span style="color:#f92672">import</span> DataLoader
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dataset_transform <span style="color:#f92672">=</span> torchvision<span style="color:#f92672">.</span>transforms<span style="color:#f92672">.</span>Compose([
+</span></span><span style="display:flex;"><span>torchvision<span style="color:#f92672">.</span>transforms<span style="color:#f92672">.</span>ToTensor()
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> torchvision<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>CIFAR10(root<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./dataset&#34;</span>,train<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,transform<span style="color:#f92672">=</span>dataset_transform,download<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>data_loader <span style="color:#f92672">=</span> DataLoader(dataset<span style="color:#f92672">=</span>dataset,batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>,shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,num_workers<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,drop_last<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#初始化container</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">mymodules</span>(nn<span style="color:#f92672">.</span>Module):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __init__(self):
+</span></span><span style="display:flex;"><span>        super(mymodules,self)<span style="color:#f92672">.</span>__init__()
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>conv1 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(in_channels<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>,out_channels<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>,kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>,stride<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,padding<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forward</span>(self, x):
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>conv1(x)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#輸出測試:</span>
+</span></span><span style="display:flex;"><span>Mymodules <span style="color:#f92672">=</span> mymodules()
+</span></span><span style="display:flex;"><span>print(Mymodules)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#匯入圖片</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> data_loader:
+</span></span><span style="display:flex;"><span>    imgs,labels <span style="color:#f92672">=</span> data
+</span></span><span style="display:flex;"><span>    output <span style="color:#f92672">=</span> Mymodules(imgs)
+</span></span><span style="display:flex;"><span>    print(output<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><ul>
+<li>輸出結果:</li>
+</ul>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%204.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<ul>
+<li>因為kernel size=3<em>3，每次移動一格，不會超過邊界，所以最後尺寸才會從32</em>32變成30*30</li>
+<li>匯入圖片的輸出結果長這樣:</li>
+</ul>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%205.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<ul>
+<li>第一項顯示batch size,第二項為chennels,後面是長跟高</li>
+</ul>
+<h1 id="將結果顯示到tensorboard">將結果顯示到tensorboard</h1>
+<ul>
+<li>輸出設為channels=6，會無法顯示，需要轉換channels到3，才可被writer讀到</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> torchvision
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torch <span style="color:#f92672">import</span> nn
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.data <span style="color:#f92672">import</span> DataLoader
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.tensorboard <span style="color:#f92672">import</span> SummaryWriter
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dataset_transform <span style="color:#f92672">=</span> torchvision<span style="color:#f92672">.</span>transforms<span style="color:#f92672">.</span>Compose([
+</span></span><span style="display:flex;"><span>torchvision<span style="color:#f92672">.</span>transforms<span style="color:#f92672">.</span>ToTensor()
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> torchvision<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>CIFAR10(root<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./dataset&#34;</span>,train<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,transform<span style="color:#f92672">=</span>dataset_transform,download<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>data_loader <span style="color:#f92672">=</span> DataLoader(dataset<span style="color:#f92672">=</span>dataset,batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>,shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,num_workers<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,drop_last<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>writer <span style="color:#f92672">=</span> SummaryWriter(log_dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#初始化container</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">mymodules</span>(nn<span style="color:#f92672">.</span>Module):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __init__(self):
+</span></span><span style="display:flex;"><span>        super(mymodules,self)<span style="color:#f92672">.</span>__init__()
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>conv1 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(in_channels<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>,out_channels<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>,kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>,stride<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,padding<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forward</span>(self, x):
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>conv1(x)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>Mymodules <span style="color:#f92672">=</span> mymodules()
+</span></span><span style="display:flex;"><span>print(Mymodules)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#匯入圖片</span>
+</span></span><span style="display:flex;"><span>step <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> data_loader:
+</span></span><span style="display:flex;"><span>    imgs,labels <span style="color:#f92672">=</span> data
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print(imgs.shape)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print:torch.Size([64, 3, 32, 32])</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#writer.add_images(&#34;cnn_input&#34;,imgs,step)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    output <span style="color:#f92672">=</span> Mymodules(imgs)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print(output.shape)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print:torch.Size([64, 6, 30, 30])，channel變成6，writer會寫不進去(需要chennel=3)，需要reshape做變換</span>
+</span></span><span style="display:flex;"><span>    output <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>reshape(output,(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">30</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#確認output_shape: print(output.shape)</span>
+</span></span><span style="display:flex;"><span>    writer<span style="color:#f92672">.</span>add_images(<span style="color:#e6db74">&#34;cnn_output&#34;</span>,output,step)
+</span></span><span style="display:flex;"><span>    step <span style="color:#f92672">=</span> step<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><ul>
+<li>因為channels有做改變，所以batch size也會不一樣，從6變到3，size會變大，若是不確定，可以輸入-1(第一項是batch size)，電腦會根據後面的值自動計算</li>
+<li>輸出長這樣:</li>
+</ul>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%206.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<ul>
+<li>batch size(64,6,30,30)→(128,3,30,30)，size變大2倍</li>
+</ul>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%207.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<h1 id="圖片變化原理和下面shape公式有關">圖片變化原理(和下面shape公式有關)</h1>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%208.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<ul>
+<li>經過神經層(convolution)後通道數由3變成64</li>
+<li>shape公式:</li>
+</ul>
+<p><img src="/%E5%8D%B7%E7%A9%8D%E5%B1%A4%28Convolution%20Layers%29%20a66f75d937f44302a2aa191082ffe5c6/Untitled%209.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<ul>
+<li>N代表輸入的batch size，會根據公式重新計算新的高跟寬，所以最後算出30<em>30，原本的dataset的圖片應該是32</em>32才對</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/pytorch/">pytorch</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相關文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/transform-7fac7412a4944a2aae5bf9b8c4974304/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dnndeep-learning-809b1debc15f4d09a236679e079deb19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/%E7%9A%AE%E8%86%9A%E7%99%8C%E9%A0%90%E6%B8%AC%E7%B4%80%E9%8C%84-23c5062e241b4c0492152cd2766c2a76/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dnndeep-learning-809b1debc15f4d09a236679e079deb19/dnnpython-55cc8a1c4d444ac9927be40fdab694ca/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E9%9D%9E%E7%B7%9A%E6%80%A7%E6%BF%80%E6%B4%BB-11b4c2014a504f1795a8dc7e736d9daf/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 rui&#39;s blog
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 建立 <br />
+        主題 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.21.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 設計
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

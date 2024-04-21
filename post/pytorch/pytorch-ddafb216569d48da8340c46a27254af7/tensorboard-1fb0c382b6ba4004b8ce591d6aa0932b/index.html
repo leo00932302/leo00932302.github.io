@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Tensorboard 簡介: 可以將loss變化過程，input,output圖像化:
+使用方法: from torch.utils.tensorboard import SummaryWriter writer = SummaryWriter(&amp;#34;logs&amp;#34;) #將對應的事件文件存在logs文件夾底下，沒有會自己新增 writer.add_image() #新增圖片 writer.add_scalar() #新增標量 writer.close() ps.SummaryWriter是一個class，這裡是在宣告建立一個class
+開啟方法: 要執行tensorboard需要有訓練的紀錄檔，將項目資料夾指向logs資料夾(之前建的)，logdir(系統參數)是紀錄文件的文件夾所在位置(通常放在logs資料夾)
+tensorboard --logdir=logs 執行的時候是在port上輸出，若是有衝突的話可以修改port tensorboard --logdir=logs --port=6007 scalar範例: the arguments of add_scalar(self,tag,scalar_value,global_step=None,walltime=None): tag:輸出結果標題，若是名稱相同會自動分到同一類，此時global_step會決定順序
+scalar_value:y軸
+global_step:x軸
+輸出一個y=x的圖形在tensorboard上 from torch.utils.tensorboard import SummaryWriter for i in range(100): writer.add_scalar(&amp;#34;y=x&amp;#34;,i,i) writer.close() ps.圖形可能會出現互相覆蓋的情況，可以把之前的紀錄檔刪掉，或是在建立一個新的資料夾。
+圖片範例: 函數定義: def add_image(self, tag, img_tensor, global_step=None, walltime=None, dataformats=&amp;#34;CHW&amp;#34;) img_tensor:輸入的圖像，有規定的類型(torch.tensor,numpy.array)，且有規定尺寸(dataformats改成) global_step:x軸(對於顯示圖片來說會需要再tensorboard選擇要觀看的step，因為圖片和數字不同，無法直接表達連續性)，然後使用者可以觀察不同step圖片是如何變化的。 shap解決: 若是使用PIL到numpy，需要再add_image()中指定shap中每一個數字/維度所代表意義。
+解決方法:
+可以使用print(img_array.shap)查看格式，看通道放的位置，若是(512,768,3)，代表(H,W,C)(高度，寬度，通道)dataformats改成’HWC’(默認是CHW)
+from torch.utils.tensorboard import SummaryWriter from PIL import Image import numpy as np writer = SummaryWriter(&amp;#34;logs&amp;#34;) #將對應的事件文件存在logs文件夾底下，沒有會自己新增 img_path = &amp;lt;path&amp;gt; img = Image.'>
+<title>pytorch</title>
+
+<link rel='canonical' href='https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/tensorboard-1fb0c382b6ba4004b8ce591d6aa0932b/'>
+
+<link rel="stylesheet" href="/scss/style.min.24ef1cc321916467896e8c70c10c0ad7b98c2a8df14298032fb637216e397f50.css"><meta property='og:title' content='pytorch'>
+<meta property='og:description' content='Tensorboard 簡介: 可以將loss變化過程，input,output圖像化:
+使用方法: from torch.utils.tensorboard import SummaryWriter writer = SummaryWriter(&amp;#34;logs&amp;#34;) #將對應的事件文件存在logs文件夾底下，沒有會自己新增 writer.add_image() #新增圖片 writer.add_scalar() #新增標量 writer.close() ps.SummaryWriter是一個class，這裡是在宣告建立一個class
+開啟方法: 要執行tensorboard需要有訓練的紀錄檔，將項目資料夾指向logs資料夾(之前建的)，logdir(系統參數)是紀錄文件的文件夾所在位置(通常放在logs資料夾)
+tensorboard --logdir=logs 執行的時候是在port上輸出，若是有衝突的話可以修改port tensorboard --logdir=logs --port=6007 scalar範例: the arguments of add_scalar(self,tag,scalar_value,global_step=None,walltime=None): tag:輸出結果標題，若是名稱相同會自動分到同一類，此時global_step會決定順序
+scalar_value:y軸
+global_step:x軸
+輸出一個y=x的圖形在tensorboard上 from torch.utils.tensorboard import SummaryWriter for i in range(100): writer.add_scalar(&amp;#34;y=x&amp;#34;,i,i) writer.close() ps.圖形可能會出現互相覆蓋的情況，可以把之前的紀錄檔刪掉，或是在建立一個新的資料夾。
+圖片範例: 函數定義: def add_image(self, tag, img_tensor, global_step=None, walltime=None, dataformats=&amp;#34;CHW&amp;#34;) img_tensor:輸入的圖像，有規定的類型(torch.tensor,numpy.array)，且有規定尺寸(dataformats改成) global_step:x軸(對於顯示圖片來說會需要再tensorboard選擇要觀看的step，因為圖片和數字不同，無法直接表達連續性)，然後使用者可以觀察不同step圖片是如何變化的。 shap解決: 若是使用PIL到numpy，需要再add_image()中指定shap中每一個數字/維度所代表意義。
+解決方法:
+可以使用print(img_array.shap)查看格式，看通道放的位置，若是(512,768,3)，代表(H,W,C)(高度，寬度，通道)dataformats改成’HWC’(默認是CHW)
+from torch.utils.tensorboard import SummaryWriter from PIL import Image import numpy as np writer = SummaryWriter(&amp;#34;logs&amp;#34;) #將對應的事件文件存在logs文件夾底下，沒有會自己新增 img_path = &amp;lt;path&amp;gt; img = Image.'>
+<meta property='og:url' content='https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/tensorboard-1fb0c382b6ba4004b8ce591d6aa0932b/'>
+<meta property='og:site_name' content='rui&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='pytorch' /><meta property='article:published_time' content='2024-01-27T02:12:31&#43;08:00'/><meta property='article:modified_time' content='2024-01-27T02:12:31&#43;08:00'/>
+<meta name="twitter:title" content="pytorch">
+<meta name="twitter:description" content="Tensorboard 簡介: 可以將loss變化過程，input,output圖像化:
+使用方法: from torch.utils.tensorboard import SummaryWriter writer = SummaryWriter(&amp;#34;logs&amp;#34;) #將對應的事件文件存在logs文件夾底下，沒有會自己新增 writer.add_image() #新增圖片 writer.add_scalar() #新增標量 writer.close() ps.SummaryWriter是一個class，這裡是在宣告建立一個class
+開啟方法: 要執行tensorboard需要有訓練的紀錄檔，將項目資料夾指向logs資料夾(之前建的)，logdir(系統參數)是紀錄文件的文件夾所在位置(通常放在logs資料夾)
+tensorboard --logdir=logs 執行的時候是在port上輸出，若是有衝突的話可以修改port tensorboard --logdir=logs --port=6007 scalar範例: the arguments of add_scalar(self,tag,scalar_value,global_step=None,walltime=None): tag:輸出結果標題，若是名稱相同會自動分到同一類，此時global_step會決定順序
+scalar_value:y軸
+global_step:x軸
+輸出一個y=x的圖形在tensorboard上 from torch.utils.tensorboard import SummaryWriter for i in range(100): writer.add_scalar(&amp;#34;y=x&amp;#34;,i,i) writer.close() ps.圖形可能會出現互相覆蓋的情況，可以把之前的紀錄檔刪掉，或是在建立一個新的資料夾。
+圖片範例: 函數定義: def add_image(self, tag, img_tensor, global_step=None, walltime=None, dataformats=&amp;#34;CHW&amp;#34;) img_tensor:輸入的圖像，有規定的類型(torch.tensor,numpy.array)，且有規定尺寸(dataformats改成) global_step:x軸(對於顯示圖片來說會需要再tensorboard選擇要觀看的step，因為圖片和數字不同，無法直接表達連續性)，然後使用者可以觀察不同step圖片是如何變化的。 shap解決: 若是使用PIL到numpy，需要再add_image()中指定shap中每一個數字/維度所代表意義。
+解決方法:
+可以使用print(img_array.shap)查看格式，看通道放的位置，若是(512,768,3)，代表(H,W,C)(高度，寬度，通道)dataformats改成’HWC’(默認是CHW)
+from torch.utils.tensorboard import SummaryWriter from PIL import Image import numpy as np writer = SummaryWriter(&amp;#34;logs&amp;#34;) #將對應的事件文件存在logs文件夾底下，沒有會自己新增 img_path = &amp;lt;path&amp;gt; img = Image.">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切換選單">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huca96465e600737c45c3b5333344678c8_10419120_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rui&#39;s blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>夜晚模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/tensorboard-1fb0c382b6ba4004b8ce591d6aa0932b/">pytorch</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 27, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    閱讀時間: 1 分鐘
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="tensorboard">Tensorboard</h1>
+<h1 id="簡介">簡介:</h1>
+<p>可以將loss變化過程，input,output圖像化:</p>
+<p><img src="/Tensorboard%201fb0c382b6ba4004b8ce591d6aa0932b/Untitled.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<p><img src="/Tensorboard%201fb0c382b6ba4004b8ce591d6aa0932b/Untitled%201.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<h1 id="使用方法">使用方法:</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.tensorboard <span style="color:#f92672">import</span> SummaryWriter
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>writer <span style="color:#f92672">=</span> SummaryWriter(<span style="color:#e6db74">&#34;logs&#34;</span>)  <span style="color:#75715e">#將對應的事件文件存在logs文件夾底下，沒有會自己新增</span>
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>add_image()  <span style="color:#75715e">#新增圖片</span>
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>add_scalar()  <span style="color:#75715e">#新增標量</span>
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><p>ps.SummaryWriter是一個class，這裡是在宣告建立一個class</p>
+<ul>
+<li>開啟方法:</li>
+</ul>
+<p>要執行tensorboard需要有訓練的紀錄檔，將項目資料夾指向logs資料夾(之前建的)，logdir(系統參數)是紀錄文件的文件夾所在位置(通常放在logs資料夾)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tensorboard --logdir<span style="color:#f92672">=</span>logs
+</span></span></code></pre></div><ul>
+<li>執行的時候是在port上輸出，若是有衝突的話可以修改port</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tensorboard --logdir<span style="color:#f92672">=</span>logs --port<span style="color:#f92672">=</span><span style="color:#ae81ff">6007</span>
+</span></span></code></pre></div><h2 id="scalar範例">scalar範例:</h2>
+<ul>
+<li>the arguments of add_scalar(self,tag,scalar_value,global_step=None,walltime=None):</li>
+</ul>
+<p>tag:輸出結果標題，若是名稱相同會自動分到同一類，此時global_step會決定順序</p>
+<p>scalar_value:y軸</p>
+<p>global_step:x軸</p>
+<ul>
+<li>輸出一個y=x的圖形在tensorboard上</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.tensorboard <span style="color:#f92672">import</span> SummaryWriter
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span> writer<span style="color:#f92672">.</span>add_scalar(<span style="color:#e6db74">&#34;y=x&#34;</span>,i,i)
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><p><img src="/Tensorboard%201fb0c382b6ba4004b8ce591d6aa0932b/Untitled%202.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Untitled"
+	
+	
+></p>
+<p>ps.圖形可能會出現互相覆蓋的情況，可以把之前的紀錄檔刪掉，或是在建立一個新的資料夾。</p>
+<h2 id="圖片範例">圖片範例:</h2>
+<ul>
+<li>函數定義:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_image</span>(self, tag, img_tensor, global_step<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, walltime<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, dataformats<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;CHW&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>img_tensor:輸入的圖像，有規定的類型(torch.tensor,numpy.array)，且有規定尺寸(dataformats改成)</li>
+<li>global_step:x軸(對於顯示圖片來說會需要再tensorboard選擇要觀看的step，因為圖片和數字不同，無法直接表達連續性)，然後使用者可以觀察不同step圖片是如何變化的。</li>
+<li>shap解決:</li>
+</ul>
+<p>若是使用PIL到numpy，需要再add_image()中指定shap中每一個數字/維度所代表意義。</p>
+<p>解決方法:</p>
+<p>可以使用print(img_array.shap)查看格式，看通道放的位置，若是(512,768,3)，代表(H,W,C)(高度，寬度，通道)dataformats改成’HWC’(默認是CHW)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.tensorboard <span style="color:#f92672">import</span> SummaryWriter
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>writer <span style="color:#f92672">=</span> SummaryWriter(<span style="color:#e6db74">&#34;logs&#34;</span>)  <span style="color:#75715e">#將對應的事件文件存在logs文件夾底下，沒有會自己新增</span>
+</span></span><span style="display:flex;"><span>img_path <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>path<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(img_path)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#print(type(img)) #會回復PIL.JpegImageFile類型，需要轉換</span>
+</span></span><span style="display:flex;"><span>img_array <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(img)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>add_image(<span style="color:#e6db74">&#34;show_picture&#34;</span>,img_array,<span style="color:#ae81ff">1</span>,dataformats<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HWC&#39;</span>)  <span style="color:#75715e">#新增圖片</span>
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><p>ps.若是使用PIL需要轉換檔案類型，使用opencv開啟圖片預設是numpy，會比較方便，具體如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.tensorboard <span style="color:#f92672">import</span> SummaryWriter
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cv2 <span style="color:#66d9ef">as</span> cv
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>writer <span style="color:#f92672">=</span> SummaryWriter(<span style="color:#e6db74">&#34;logs&#34;</span>)  <span style="color:#75715e">#將對應的事件文件存在logs文件夾底下，沒有會自己新增</span>
+</span></span><span style="display:flex;"><span>img_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dataset/72908383_p0.png&#34;</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> cv<span style="color:#f92672">.</span>imread(img_path)
+</span></span><span style="display:flex;"><span>print(type(img)) <span style="color:#75715e">#會回復PIL.JpegImageFile類型，需要轉換</span>
+</span></span><span style="display:flex;"><span>img_array <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(img)
+</span></span><span style="display:flex;"><span>print(img_array<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>add_image(<span style="color:#e6db74">&#34;show_picture&#34;</span>,img_array,<span style="color:#ae81ff">1</span>,dataformats<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;HWC&#39;</span>)  <span style="color:#75715e">#新增圖片</span>
+</span></span><span style="display:flex;"><span>writer<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/pytorch/">pytorch</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相關文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/pytprch%E5%85%A7%E5%BB%BAdataset%E7%9A%84%E4%BD%BF%E7%94%A8-a6ba7d74c2b942508f822e3d387de155/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/%E8%B3%87%E6%96%99%E8%AE%80%E5%8F%96%E5%8E%9F%E7%90%86-f67a95d3f5e84ba0b38112e4c58f1fc3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/python%E7%9A%84%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-b10a35da7cf14ebdb021c48de47cf7a3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dataset%E7%9A%84%E8%A3%BD%E4%BD%9C%E5%8F%AF%E4%BB%A5%E5%BE%9E%E9%80%99%E8%A3%A1%E9%96%8B%E5%A7%8B%E7%9C%8B%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81-302063e805d74a48bbdf113ba8cb17fe/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dataloader-3000ab06a65c4b238607c4ee4f9e67bf/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">pytorch</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 rui&#39;s blog
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 建立 <br />
+        主題 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.21.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 設計
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

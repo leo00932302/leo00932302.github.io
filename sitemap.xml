@@ -59,6 +59,81 @@
     <loc>https://leo00932302.github.io/post/git/</loc>
     <lastmod>2024-01-27T02:12:31+08:00</lastmod>
   </url><url>
+    <loc>https://leo00932302.github.io/tags/pytorch/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/cnnpython-fab8b1dd0a7b4f46ac8ea5f6abce5269/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E5%8D%B7%E7%A9%8D%E5%B1%A4convolution-layers-a66f75d937f44302a2aa191082ffe5c6/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E6%B1%A0%E5%8C%96%E5%B1%A4pooling-layers-64f5836035104538aca6ecfcf11d84eb/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E7%B7%9A%E6%80%A7%E5%B1%A4%E5%8F%8A%E5%85%B6%E4%BB%96%E5%B1%A4-20c8a2790edf41b7851c8ad32d1b43c5/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/cnn-5d1d3da611ad4f5ea54e5dcdd4f71d12/%E9%9D%9E%E7%B7%9A%E6%80%A7%E6%BF%80%E6%B4%BB-11b4c2014a504f1795a8dc7e736d9daf/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/compose%E7%9A%84%E7%94%A8%E6%B3%95transform%E7%9A%84class-2565a397437e445d93e158802b38b8ad/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dataloader-3000ab06a65c4b238607c4ee4f9e67bf/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dataset%E7%9A%84%E8%A3%BD%E4%BD%9C%E5%8F%AF%E4%BB%A5%E5%BE%9E%E9%80%99%E8%A3%A1%E9%96%8B%E5%A7%8B%E7%9C%8B%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81-302063e805d74a48bbdf113ba8cb17fe/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dnndeep-learning-809b1debc15f4d09a236679e079deb19/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/dnndeep-learning-809b1debc15f4d09a236679e079deb19/dnnpython-55cc8a1c4d444ac9927be40fdab694ca/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/python%E7%9A%84%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-b10a35da7cf14ebdb021c48de47cf7a3/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/pytprch%E5%85%A7%E5%BB%BAdataset%E7%9A%84%E4%BD%BF%E7%94%A8-a6ba7d74c2b942508f822e3d387de155/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/reference-96c7b6e2ef3b438c8f6b3f9824f48f7f/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/rnn-b352723236c34dbdadcc9735bf093d07/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/rnn-b352723236c34dbdadcc9735bf093d07/knnpython-e43b05cba91441e786026cd98f2606fe/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/svm-840bfe110f9646308b665cf148333537/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/svm-840bfe110f9646308b665cf148333537/svmpython-d443a347918e49dbb372b93fb142cca8/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/tensorboard-1fb0c382b6ba4004b8ce591d6aa0932b/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/transform-7fac7412a4944a2aae5bf9b8c4974304/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/%E7%9A%AE%E8%86%9A%E7%99%8C%E9%A0%90%E6%B8%AC%E7%B4%80%E9%8C%84-23c5062e241b4c0492152cd2766c2a76/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%A7%8B-b3be7cae5e9240a48fd5b0f4c3e586f5/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://leo00932302.github.io/post/pytorch/pytorch-ddafb216569d48da8340c46a27254af7/%E8%B3%87%E6%96%99%E8%AE%80%E5%8F%96%E5%8E%9F%E7%90%86-f67a95d3f5e84ba0b38112e4c58f1fc3/</loc>
+    <lastmod>2024-01-27T02:12:31+08:00</lastmod>
+  </url><url>
     <loc>https://leo00932302.github.io/tags/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B/</loc>
     <lastmod>2024-01-23T23:23:04+08:00</lastmod>
   </url><url>
@@ -84,6 +159,8 @@
     <loc>https://leo00932302.github.io/page/search/</loc>
   </url><url>
     <loc>https://leo00932302.github.io/categories/test/</loc>
+  </url><url>
+    <loc>https://leo00932302.github.io/categories/%E8%80%83%E5%8F%A4%E9%A1%8C/</loc>
   </url><url>
     <loc>https://leo00932302.github.io/categories/os/</loc>
   </url>
